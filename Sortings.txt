@@ -1,0 +1,146 @@
+import java.util.*;
+public class MyClass {
+    /*void merge(int arr[],int l,int m,int r)
+    {
+        int n1 = m-l+1;
+        int n2 = r-m;
+        int left[] = new int[n1];
+        int right[] = new int[n2];
+        for(int i=0;i<n1;i++)left[i] = arr[l+i];
+        for(int i=0;i<n2;i++)right[i] = arr[m+i+1];
+        int i=0;int j=0;int k=l;
+        while(i<n1 && j<n2)
+        {
+            if(left[i]<=right[j])
+            {
+                arr[k++]=left[i++];
+            }
+            else
+            arr[k++]=right[j++];
+        }
+        while(i<n1)
+        {
+            arr[k++]=left[i++];
+        }
+        while(j<n2)
+        {
+            arr[k++]=right[j++];
+        }
+    }
+    void sort(int arr[],int l,int r)
+    {
+        int m;
+        if(l<r)
+        {
+            m = l+(r-l)/2;
+            sort(arr,l,m);
+            sort(arr,m+1,r);
+            merge(arr,l,m,r);
+        }
+    }
+    void bubbleSort(int arr[],int n)
+    {
+        int temp;
+        boolean swapped = false;
+        for(int i = 0 ;i<n-1;i++)
+        {
+            swapped = false;
+            for(int j=0;j<n-i-1;j++)
+            {
+                if(arr[j]>arr[j+1])
+                {
+                    temp = arr[j];
+                    arr[j] = arr[j+1];
+                    arr[j+1] = temp;
+                    swapped = true;
+                }
+            }
+            if(swapped==false)
+            break;
+        }
+    }
+    void selectionSort(int arr[],int n)
+    {
+        int min_index,temp;
+        for(int i=0;i<n-1;i++)
+        {
+             min_index = i;
+             for(int j=i+1;j<n;j++)
+             {
+                 if(arr[j]<arr[min_index])
+                    min_index = j;
+             }
+             temp = arr[i];
+             arr[i] = arr[min_index];
+             arr[min_index] = temp;
+        }
+    }
+    void insertionSort(int arr[],int n)
+    {
+        int i,j,val;
+        for(i=1;i<n;i++)
+        {
+            j = i-1;
+            val = arr[i];
+            while(j>=0 && arr[j]>val)
+            {
+                arr[j+1] = arr[j];
+                j--;
+            }
+            arr[j+1] = val;
+        }
+    }*/
+    void swap(int arr[],int i,int j)
+    {
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+    }
+    int part(int arr[],int low,int high)
+    {
+        int pivot = arr[high];
+        int i=(low-1),temp;
+        for(int j=low;j<=high-1;j++)
+        {
+            if(arr[j]<pivot)
+            {
+                i++;
+                swap(arr, i, j);
+            }
+        }
+        i++;
+        temp = arr[i];
+        arr[i] = arr[high];
+        arr[high] = temp;
+        return i;
+        
+    }
+    void quickSort(int arr[],int low,int high)
+    {
+        if(low<high)
+        {
+            int pi = part(arr,low,high);
+            quickSort(arr,low,pi-1);
+            quickSort(arr,pi+1,high);
+        }
+    }
+    void print(int arr[],int n)
+    {
+        for(int i=0;i<n;i++)
+        System.out.print(arr[i]+" ");
+    }
+    
+    public static void main(String args[]) {
+        MyClass mc = new MyClass();
+      Scanner sc = new Scanner(System.in);
+      String in = sc.nextLine();
+       String input[]= in.split(" ");
+       int n = input.length;
+      int arr[] = new int[n];
+      for(int i=0;i<n;i++)
+      {arr[i] = Integer.parseInt(input[i]);System.out.print(arr[i]+" ");}
+      System.out.println();
+      mc.quickSort(arr,0,n-1);
+      mc.print(arr,n);
+    }
+}
